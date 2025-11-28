@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, Button, ScrollView } from 'react-native';
 import { OSU_API_KEY, OSU_API_BASE } from '@env';
+import { styles } from './styles/styles';
 
 export default function App() {
   const [username, setUsername] = useState("peppy");
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState([]);
 
   async function fetchBeatmaps() {
     const params = new URLSearchParams({
@@ -23,16 +24,22 @@ export default function App() {
   }
 
   return (
-    <ScrollView style={{ marginTop: 70, padding: 20 }}>
-      <Text>osu-tracker — test .env</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>osu-tracker — test .env</Text>
 
       <Button title="Fetch beatmaps" onPress={fetchBeatmaps} />
 
-      {result && (
-        <Text style={{ marginTop: 20, fontFamily: "monospace" }}>
-          {JSON.stringify(result, null, 2)}
-        </Text>
-      )}
-    </ScrollView>
+      <ScrollView style={styles.scroll}>
+        {result.map((map, index) => (
+          <View key={index} style={styles.card}>
+            <Text style={styles.mapTitle}>{map.title}</Text>
+            <Text style={styles.artist}>{map.artist}</Text>
+            <Text style={styles.info}>Diff : {map.version}</Text>
+            <Text style={styles.info}>BPM : {map.bpm}</Text>
+            <Text style={styles.info}>⭐ {parseFloat(map.difficultyrating || 0).toFixed(2)}</Text>
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   );
 }
