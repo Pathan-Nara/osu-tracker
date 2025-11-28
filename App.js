@@ -1,63 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native';
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { View, Text, Button, ScrollView } from 'react-native';
+import { OSU_API_KEY, OSU_API_BASE } from '@env';
 
 export default function App() {
-  const [cpt, setCpt] = useState(0)
-  const [showSpecialButton, setShowSpecialButton] = useState(false)
+  const [username, setUsername] = useState("peppy");
+  const [result, setResult] = useState(null);
 
-  function button() {
-    return (<Button title="Bouton d'autisme special pour Cecile" onPress={() => {
-      alert("CECILE A CLIQUE SUR LE BOUTON D'AUTISME")
-    }} />
-    )
-  }
-  
-  useEffect(() => {
-    if (cpt === 10) {
-      alert("CECILE A ATTEINT 10, FELICITATIONS!");
-    }
+  async function fetchBeatmaps() {
+    const params = new URLSearchParams({
+      k: OSU_API_KEY,
+      u: username,
+      type: "string",
+      m: "0",
+      limit: "10"
+    });
 
-    if (cpt === 100) {
-      alert("CECILE A DECOUVERT LE BOUTON SPECIAL, FELICITATIONS!");
-      setShowSpecialButton(true);
-    }
-  }, [cpt]);
+    const url = `${OSU_API_BASE}?${params.toString()}`;
 
-  function incrementCpt() {
-    setCpt(cpt + 1)
+    const res = await fetch(url);
+    const data = await res.json();
+    setResult(data);
   }
 
   return (
-    <View style={styles.container}>+6
-      <Text>Open up App.js to start working on your app!</Text>
-      <Text> CECILE speedrun le jeu</Text>
-      <Text> Count: {cpt} </Text>
-      <Button title="CECILE CLIQUE MOI" onPress={() => {
-        alert("BRAVO CECILE TU AS GAGNE")
-      }} />
-      <Button title="CECILE NE PAS CLIQUE MOI" onPress={() => {
-        alert("CECILE ESPECE DE GROGNASSE")
-      }} />
+    <ScrollView style={{ marginTop: 70, padding: 20 }}>
+      <Text>osu-tracker — test .env</Text>
 
-      <Button title="Bouton d'autisme pour Cecile" onPress={() => {
-        incrementCpt()
-      }} />
+      <Button title="Fetch beatmaps" onPress={fetchBeatmaps} />
 
-      {showSpecialButton && button()}
-
-      <StatusBar style="auto" />
-    </View>
+      {result && (
+        <Text style={{ marginTop: 20, fontFamily: "monospace" }}>
+          {JSON.stringify(result, null, 2)}
+        </Text>
+      )}
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffffff',
-    
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
