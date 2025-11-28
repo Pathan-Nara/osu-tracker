@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Button, ScrollView } from 'react-native';
 import { OSU_API_KEY, OSU_API_BASE } from '@env';
-import { styles } from './styles/styles';
+import { styles } from '../styles/styles';
 
 interface BeatmapData {
   title: string;

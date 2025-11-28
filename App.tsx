@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'; 
-import Beatmap from './Beatmap';
-import Home from './Home';
+import Beatmap from './screens/Beatmap';
+import Home from './screens/Home';
 
 const Stack = createStackNavigator(); 
 

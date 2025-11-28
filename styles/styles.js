@@ -2,9 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
+    alignItems: 'center', 
     padding: 20,
     flex: 1,
-    backgroundColor: '#0d0d0d',
+    backgroundColor: '#121212',
   },
   title: {
     fontSize: 24,
@@ -34,5 +35,5 @@ export const styles = StyleSheet.create({
   },
   info: {
     color: '#aaaaaa'
-  }
+  },
 });
