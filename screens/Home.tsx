@@ -8,10 +8,12 @@ import {
 } from 'react-native';
 import { TabButtons } from '../components/TabButtons';
 import { SearchBar } from '../components/SearchBar';
+import { SearchHistory } from '../components/SearchHistory';
 import { PlayerCard } from '../components/PlayerCard';
 import { BeatmapCard } from '../components/BeatmapCard';
 import { EmptyState } from '../components/EmptyState';
 import { searchViewModel } from '../viewmodels/SearchViewModel';
+import { SearchHistoryService, SearchHistoryItem } from '../services/SearchHistoryService';
 import { Player } from '../models/Player';
 import { Beatmap } from '../models/Beatmap';
 import { styles } from '../styles/styles';
@@ -22,8 +24,10 @@ export default function Home() {
   const [results, setResults] = React.useState<Player | Beatmap[] | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const [history, setHistory] = React.useState<SearchHistoryItem[]>([]);
 
   React.useEffect(() => {
+    loadHistory();
     const unsubscribe = searchViewModel.subscribe(() => {
       setResults(searchViewModel.getResults());
       setIsLoading(searchViewModel.isLoading());
@@ -32,6 +36,15 @@ export default function Home() {
     return unsubscribe;
   }, []);
 
+  React.useEffect(() => {
+    loadHistory();
+  }, [searchType]);
+
+  const loadHistory = async () => {
+    const historyData = await SearchHistoryService.getHistoryByType(searchType);
+    setHistory(historyData.slice(0, 5));
+  };
+
   const handleTabChange = (tab: 'player' | 'beatmap') => {
     setSearchType(tab);
     searchViewModel.setType(tab);
@@ -39,10 +52,25 @@ export default function Home() {
     searchViewModel.clear();
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) return;
     searchViewModel.setQuery(searchQuery);
     searchViewModel.setType(searchType);
-    searchViewModel.search();
+    await searchViewModel.search();
+    await SearchHistoryService.addSearch(searchQuery, searchType);
+    await loadHistory();
+  };
+
+  const handleHistorySelect = async (query: string) => {
+    setSearchQuery(query);
+    searchViewModel.setQuery(query);
+    searchViewModel.setType(searchType);
+    await searchViewModel.search();
+  };
+
+  const handleRemoveHistory = async (query: string, type: 'player' | 'beatmap') => {
+    await SearchHistoryService.removeFromHistory(query, type);
+    await loadHistory();
   };
 
   return (
@@ -71,6 +99,12 @@ export default function Home() {
               : 'Nom de la beatmap...'
           }
           isLoading={isLoading}
+        />
+
+        <SearchHistory
+          history={history}
+          onSelectItem={handleHistorySelect}
+          onRemoveItem={handleRemoveHistory}
         />
 
         {error && (

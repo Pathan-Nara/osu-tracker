@@ -482,6 +482,49 @@ export const styles = StyleSheet.create({
     color: COLORS.textTertiary,
     fontStyle: 'italic',
   },
+
+  // ========== SEARCH HISTORY ==========
+  historyContainer: {
+    marginBottom: 16,
+    paddingHorizontal: 16,
+  },
+  historyTitle: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: COLORS.textSecondary,
+    marginBottom: 8,
+    textTransform: 'uppercase',
+  },
+  historyItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: COLORS.surfaceLight,
+    borderRadius: 20,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    marginRight: 8,
+    borderWidth: 1,
+    borderColor: COLORS.accent,
+  },
+  historyItemText: {
+    fontSize: 13,
+    fontWeight: '500',
+    color: COLORS.text,
+    maxWidth: 80,
+  },
+  historyItemBadge: {
+    fontSize: 12,
+  },
+  historyItemClose: {
+    padding: 2,
+  },
+  historyItemCloseText: {
+    fontSize: 12,
+    color: COLORS.textTertiary,
+    fontWeight: 'bold',
+  },
 });
+
 
 
