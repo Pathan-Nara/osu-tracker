@@ -6,8 +6,8 @@ export interface SearchHistoryItem {
   timestamp: number;
 }
 
-const HISTORY_KEY = '@osu_tracker_search_history';
-const MAX_HISTORY = 20;
+const history_key = '@osu_tracker_search_history';
+const max_history = 20;
 
 export class SearchHistoryService {
   static async addSearch(query: string, type: 'player' | 'beatmap'): Promise<void> {
@@ -24,8 +24,8 @@ export class SearchHistoryService {
         (item) => !(item.query === query && item.type === type)
       );
 
-      const updated = [newItem, ...filtered].slice(0, MAX_HISTORY);
-      await AsyncStorage.setItem(HISTORY_KEY, JSON.stringify(updated));
+      const updated = [newItem, ...filtered].slice(0, max_history);
+      await AsyncStorage.setItem(history_key, JSON.stringify(updated));
     } catch (e) {
       console.error('Error adding to search history:', e);
     }
@@ -33,7 +33,7 @@ export class SearchHistoryService {
 
   static async getHistory(): Promise<SearchHistoryItem[]> {
     try {
-      const data = await AsyncStorage.getItem(HISTORY_KEY);
+      const data = await AsyncStorage.getItem(history_key);
       return data ? JSON.parse(data) : [];
     } catch (e) {
       console.error('Error getting search history:', e);
@@ -53,7 +53,7 @@ export class SearchHistoryService {
 
   static async clearHistory(): Promise<void> {
     try {
-      await AsyncStorage.removeItem(HISTORY_KEY);
+      await AsyncStorage.removeItem(history_key);
     } catch (e) {
       console.error('Error clearing history:', e);
     }
@@ -65,7 +65,7 @@ export class SearchHistoryService {
       const filtered = history.filter(
         (item) => !(item.query === query && item.type === type)
       );
-      await AsyncStorage.setItem(HISTORY_KEY, JSON.stringify(filtered));
+      await AsyncStorage.setItem(history_key, JSON.stringify(filtered));
     } catch (e) {
       console.error('Error removing from history:', e);
     }
