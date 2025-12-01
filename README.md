@@ -46,8 +46,8 @@ osu-tracker/
 ### 2. Installation
 
 ```powershell
-# Naviguer au projet
-cd c:\Users\nawfe\Documents\osu-tracker
+# Naviguer au dossier du projet
+cd chemin/vers/votre/dossier/osu-tracker
 
 # Installer les dépendances
 npm install
@@ -194,4 +194,4 @@ Cet projet démontre :
 
 ---
 
-**Créé avec ❤️ pour osu! et React Native**
+**Créé avec douleur pour osu! et React Native**
