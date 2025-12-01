@@ -39,6 +39,9 @@ export class Player {
   }
 
   formatGlobalRank(): string {
+    if (this.stats.globalRank == 0) {
+      return "unranked";
+    }
     return `#${this.stats.globalRank.toLocaleString()}`;
   }
 
