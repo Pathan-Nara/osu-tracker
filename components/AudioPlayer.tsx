@@ -33,23 +33,9 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ previewUrl, beatmapTit
       playAudio();
     } else if (!isPlaying && soundRef.current) {
       soundRef.current.pauseAsync();
+      soundRef.current.setPositionAsync(0);
     }
   }, [isPlaying, previewUrl]);
-
-  useEffect(() => {
-    if (!isPlaying) return;
-
-    const interval = setInterval(async () => {
-      if (soundRef.current) {
-        const status = await soundRef.current.getStatusAsync();
-        if (status.isLoaded) {
-          setCurrentTime(status.positionMillis || 0);
-        }
-      }
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, [isPlaying]);
 
   const loadAudio = async () => {
     try {
@@ -58,6 +44,16 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ previewUrl, beatmapTit
       }
       const { sound } = await Audio.Sound.createAsync({ uri: previewUrl });
       soundRef.current = sound;
+      
+      sound.setOnPlaybackStatusUpdate((status) => {
+        if (status.isLoaded) {
+          setCurrentTime(status.positionMillis || 0);
+          if (status.didJustFinish) {
+            setIsPlaying(false);
+            setCurrentTime(0);
+          }
+        }
+      });
       
       const status = await sound.getStatusAsync();
       if (status.isLoaded) {
