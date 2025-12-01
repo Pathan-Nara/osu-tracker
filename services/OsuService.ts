@@ -96,12 +96,9 @@ export class OsuService {
 
       if (!response.ok) return [];
       const data = await response.json();
-      console.log(data);
       if (!data || !data.beatmapsets || !Array.isArray(data.beatmapsets)) return [];
-
       const searchLower = query.toLowerCase();
       const beatmaps: Beatmap[] = [];
-      
       data.beatmapsets.slice(0, 20).forEach((beatmapset: any) => {
         const titleMatch = beatmapset.title.toLowerCase().includes(searchLower);
         const artistMatch = beatmapset.artist.toLowerCase().includes(searchLower);
