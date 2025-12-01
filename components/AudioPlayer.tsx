@@ -30,6 +30,21 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ previewUrl, beatmapTit
     }
   }, [isPlaying, previewUrl]);
 
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const interval = setInterval(async () => {
+      if (soundRef.current) {
+        const status = await soundRef.current.getStatusAsync();
+        if (status.isLoaded) {
+          setCurrentTime(status.positionMillis || 0);
+        }
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [isPlaying]);
+
   const loadAudio = async () => {
     try {
       if (soundRef.current) {
