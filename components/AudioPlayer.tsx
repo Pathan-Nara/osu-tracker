@@ -23,6 +23,12 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ previewUrl, beatmapTit
   }, []);
 
   useEffect(() => {
+    if (previewUrl) {
+      loadAudio();
+    }
+  }, [previewUrl]);
+
+  useEffect(() => {
     if (previewUrl && isPlaying) {
       playAudio();
     } else if (!isPlaying && soundRef.current) {
