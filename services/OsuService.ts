@@ -84,6 +84,7 @@ export class OsuService {
       const url = new URL(`${this.apiBaseUrlV2}/beatmapsets/search`);
       url.searchParams.append('q', query);
       url.searchParams.append('sort', 'relevance_desc');
+      url.searchParams.append('s', 'any');
 
       const response = await fetch(url.toString(), {
         method: 'GET',
