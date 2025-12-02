@@ -76,15 +76,15 @@ export class OsuService {
     }
   }
 
-  async getBeatmap(query: string): Promise<Beatmap[]> {
+  async getBeatmap(query: string, rankedOnly: boolean = false): Promise<Beatmap[]> {
     try {
       const token = await this.getAccessToken();
       if (!token) return [];
 
       const url = new URL(`${this.apiBaseUrlV2}/beatmapsets/search`);
       url.searchParams.append('q', query);
-      url.searchParams.append('sort', 'relevance_desc');
-      url.searchParams.append('s', 'any');
+      url.searchParams.append('sort', 'plays_desc');
+      url.searchParams.append('s', rankedOnly ? 'ranked' : 'any');
 
       const response = await fetch(url.toString(), {
         method: 'GET',

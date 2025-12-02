@@ -9,6 +9,7 @@ import {
 import { TabButtons } from '../components/TabButtons';
 import { SearchBar } from '../components/SearchBar';
 import { SearchHistory } from '../components/SearchHistory';
+import { FilterButtons } from '../components/FilterButtons';
 import { PlayerCard } from '../components/PlayerCard';
 import { BeatmapCard } from '../components/BeatmapCard';
 import { EmptyState } from '../components/EmptyState';
@@ -25,6 +26,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [history, setHistory] = React.useState<SearchHistoryItem[]>([]);
+  const [rankedOnly, setRankedOnly] = React.useState(false);
 
   React.useEffect(() => {
     loadHistory();
@@ -49,6 +51,7 @@ export default function Home() {
     setSearchType(tab);
     searchViewModel.setType(tab);
     setSearchQuery('');
+    setRankedOnly(false);
     searchViewModel.clear();
   };
 
@@ -56,6 +59,7 @@ export default function Home() {
     if (!searchQuery.trim()) return;
     searchViewModel.setQuery(searchQuery);
     searchViewModel.setType(searchType);
+    searchViewModel.setRankedOnly(rankedOnly);
     await searchViewModel.search();
     await SearchHistoryService.addSearch(searchQuery, searchType);
     await loadHistory();
@@ -65,12 +69,17 @@ export default function Home() {
     setSearchQuery(query);
     searchViewModel.setQuery(query);
     searchViewModel.setType(searchType);
+    searchViewModel.setRankedOnly(rankedOnly);
     await searchViewModel.search();
   };
 
   const handleRemoveHistory = async (query: string, type: 'player' | 'beatmap') => {
     await SearchHistoryService.removeFromHistory(query, type);
     await loadHistory();
+  };
+
+  const handleFilterToggle = (ranked: boolean) => {
+    setRankedOnly(ranked);
   };
 
   return (
@@ -106,6 +115,10 @@ export default function Home() {
           onSelectItem={handleHistorySelect}
           onRemoveItem={handleRemoveHistory}
         />
+
+        {searchType === 'beatmap' && (
+          <FilterButtons rankedOnly={rankedOnly} onToggle={handleFilterToggle} />
+        )}
 
         {error && (
           <View style={styles.errorContainer}>

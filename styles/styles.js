@@ -524,7 +524,42 @@ export const styles = StyleSheet.create({
     color: COLORS.textTertiary,
     fontWeight: 'bold',
   },
+
+  // ========== FILTER BUTTONS ==========
+  filterContainer: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 16,
+    paddingHorizontal: 16,
+  },
+  filterButton: {
+    flex: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.surface,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  filterButtonActive: {
+    backgroundColor: COLORS.accent,
+    borderColor: COLORS.accent,
+  },
+  filterButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: COLORS.textSecondary,
+  },
+  filterButtonTextActive: {
+    color: COLORS.text,
+    fontWeight: '700',
+  },
 });
+
+
+
 
 
 

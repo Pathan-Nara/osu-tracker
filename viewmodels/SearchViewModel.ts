@@ -9,6 +9,7 @@ export class SearchViewModel {
   private results: Player | Beatmap[] | null = null;
   private loading: boolean = false;
   private error: string | null = null;
+  private rankedOnly: boolean = false;
   private listeners: (() => void)[] = [];
 
   setQuery(query: string): void {
@@ -28,6 +29,15 @@ export class SearchViewModel {
 
   getType(): 'player' | 'beatmap' {
     return this.type;
+  }
+
+  setRankedOnly(ranked: boolean): void {
+    this.rankedOnly = ranked;
+    this.notify();
+  }
+
+  getRankedOnly(): boolean {
+    return this.rankedOnly;
   }
 
   async search(): Promise<void> {
@@ -51,7 +61,7 @@ export class SearchViewModel {
           this.error = 'Joueur non trouvé';
         }
       } else {
-        const beatmaps = await osuService.getBeatmap(this.query);
+        const beatmaps = await osuService.getBeatmap(this.query, this.rankedOnly);
         if (beatmaps.length > 0) {
           this.results = beatmaps;
         } else {
