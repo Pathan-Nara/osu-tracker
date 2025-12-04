@@ -80,6 +80,10 @@ export default function Home() {
 
   const handleFilterToggle = (ranked: boolean) => {
     setRankedOnly(ranked);
+    searchViewModel.setRankedOnly(ranked);
+    if (searchQuery.trim()) {
+      searchViewModel.search();
+    }
   };
 
   return (

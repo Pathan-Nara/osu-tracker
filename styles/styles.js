@@ -32,7 +32,6 @@ export const navigationStyles = {
 };
 
 export const styles = StyleSheet.create({
-  // ========== SCREEN STYLES ==========
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
@@ -59,7 +58,6 @@ export const styles = StyleSheet.create({
     paddingBottom: 24,
   },
 
-  // ========== STATES ==========
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -97,7 +95,6 @@ export const styles = StyleSheet.create({
     lineHeight: 24,
   },
 
-  // ========== TAB BUTTONS ==========
   tabContainer: {
     flexDirection: 'row',
     gap: 12,
@@ -129,7 +126,6 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  // ========== SEARCH BAR ==========
   searchContainer: {
     flexDirection: 'row',
     gap: 12,
@@ -170,7 +166,6 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
   },
 
-  // ========== PLAYER CARD ==========
   playerContainer: {
     backgroundColor: COLORS.surface,
     borderRadius: 16,
@@ -200,7 +195,6 @@ export const styles = StyleSheet.create({
     color: COLORS.textSecondary,
   },
 
-  // ========== STATS GRID ==========
   statsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -228,7 +222,6 @@ export const styles = StyleSheet.create({
     color: COLORS.accent,
   },
 
-  // ========== SECTIONS ==========
   section: {
     marginTop: 20,
     paddingTop: 16,
@@ -242,7 +235,6 @@ export const styles = StyleSheet.create({
     marginBottom: 12,
   },
 
-  // ========== SCORE GRID ==========
   scoreGrid: {
     flexDirection: 'row',
     gap: 12,
@@ -268,7 +260,6 @@ export const styles = StyleSheet.create({
     color: COLORS.secondary,
   },
 
-  // ========== MEDAL GRID ==========
   medalGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -296,7 +287,6 @@ export const styles = StyleSheet.create({
     color: COLORS.accent,
   },
 
-  // ========== HIT GRID ==========
   hitGrid: {
     flexDirection: 'row',
     gap: 12,
@@ -322,7 +312,6 @@ export const styles = StyleSheet.create({
     color: COLORS.success,
   },
 
-  // ========== PLAYER FOOTER ==========
   playerFooter: {
     marginTop: 16,
     paddingTop: 16,
@@ -336,7 +325,6 @@ export const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
 
-  // ========== BEATMAP CARD ==========
   beatmapContainer: {
     backgroundColor: COLORS.surface,
     borderRadius: 16,
@@ -389,7 +377,6 @@ export const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
 
-  // ========== BEATMAP STATS GRID ==========
   beatmapStatsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -418,7 +405,6 @@ export const styles = StyleSheet.create({
     color: COLORS.secondary,
   },
 
-  // ========== BEATMAP FOOTER ==========
   beatmapFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -443,7 +429,6 @@ export const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
 
-  // ========== AUDIO PLAYER ==========
   audioPlayerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -488,7 +473,6 @@ export const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
 
-  // ========== SEARCH HISTORY ==========
   historyContainer: {
     marginBottom: 16,
     paddingHorizontal: 16,
@@ -530,7 +514,6 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  // ========== FILTER BUTTONS ==========
   filterContainer: {
     flexDirection: 'row',
     gap: 12,
