@@ -65,7 +65,7 @@ export function BeatmapCard({ beatmap }: { beatmap: Beatmap }) {
       </View>
 
       <View style={styles.beatmapFooter}>
-        <Text style={styles.beatmapDifficulty}>{beatmap.getDifficulty()}</Text>
+        <Text style={styles.beatmapFooterText}>Osu! tracker</Text>
         <Text style={styles.beatmapFavorites}>♡ {beatmap.favoriteCount}</Text>
       </View>
     </View>

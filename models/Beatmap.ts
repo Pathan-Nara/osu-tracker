@@ -45,11 +45,4 @@ export class Beatmap {
     return this.stats.rating.toFixed(2);
   }
 
-  getDifficulty(): string {
-    if (this.stats.od < 4) return 'Easy';
-    if (this.stats.od < 6) return 'Normal';
-    if (this.stats.od < 7.5) return 'Hard';
-    if (this.stats.od < 9) return 'Insane';
-    return 'Extra';
-  }
 }

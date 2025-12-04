@@ -437,6 +437,11 @@ export const styles = StyleSheet.create({
     color: COLORS.textSecondary,
     fontWeight: '600',
   },
+  beatmapFooterText: {
+    fontSize: 12,
+    color: COLORS.textTertiary,
+    fontStyle: 'italic',
+  },
 
   // ========== AUDIO PLAYER ==========
   audioPlayerContainer: {
