@@ -50,6 +50,12 @@ export const styles = StyleSheet.create({
     color: COLORS.text,
     textAlign: 'center',
   },
+  logo: {
+    width: 136,
+    height: 68,
+    resizeMode: 'contain',
+    marginBottom: 12,
+  },
   content: {
     flex: 1,
   },

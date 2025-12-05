@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   Text,
   SafeAreaView,
+  Image,
 } from 'react-native';
 import { TabButtons } from '../components/TabButtons';
 import { SearchBar } from '../components/SearchBar';
@@ -89,7 +90,7 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>osu! Tracker</Text>
+        <Image source={require('../assets/logo.png')} style={styles.logo} />
       </View>
 
       <ScrollView
