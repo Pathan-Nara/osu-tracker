@@ -204,11 +204,11 @@ export const styles = StyleSheet.create({
   statsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
+    gap: 8,
+    justifyContent: 'space-between',
   },
   statItem: {
-    flex: 1,
-    minWidth: '48%',
+    width: '48%',
     backgroundColor: COLORS.surfaceLight,
     borderRadius: 12,
     padding: 12,
