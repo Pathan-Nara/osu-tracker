@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export const COLORS = {
-  primary: '#7c3aed',
-  accent: '#ec4899',
-  secondary: '#3b82f6',
+  primary: '#f472b6',
+  accent: '#f472b6',
+  secondary: '#7dd3fc',
   background: '#0f172a',
   surface: '#1e293b',
   surfaceLight: '#334155',
@@ -11,8 +11,8 @@ export const COLORS = {
   textSecondary: '#cbd5e1',
   textTertiary: '#94a3b8',
   border: '#475569',
-  error: '#ef4444',
-  success: '#10b981',
+  error: '#fca5a5',
+  success: '#86efac',
 };
 
 export const navigationStyles = {
